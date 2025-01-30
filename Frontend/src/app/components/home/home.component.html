@@ -1,0 +1,21 @@
+@if (failedToLoad) {
+    <h2 class="text-center">Something went wrong...</h2>
+}@else {
+    <div class="grid">
+        @for (product of allProducts; track $index) {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.prodName.toUpperCase()}}</h5>
+                    <i class="card-brand">by {{product.brand}}</i>
+                    <hr class="hr-line">
+                    <div class="home-cart-price">
+                        <h5 class="card-text">
+                            {{product.price | currency:'EUR'}}
+                        </h5>
+                    </div>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        }
+    </div>
+}
