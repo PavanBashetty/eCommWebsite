@@ -1,0 +1,37 @@
+<div>
+    @if (isLoading) {
+        <h2 class="text-center" style="padding: 10rem;">
+            Loading...
+        </h2>
+    }@else{
+        <div class="containers">
+            <div class="right-column">
+                <div class="product-description">
+                    <span>{{selectedProduct.category}}</span>
+                    <h1>{{selectedProduct.prodName}}</h1>
+                    <h5>{{selectedProduct.brand}}</h5>
+                    <p>{{selectedProduct.description}}</p>
+                </div>
+
+                <div class="product-price">
+                    <span>{{selectedProduct.price | currency:'EUR'}}</span><br><br>
+                    <button class="btn btn-success btn-lg" [disabled]="!selectedProduct.available">
+                        {{selectedProduct.available ? 'Add to Cart':'Out of stock'}}
+                    </button>
+                    <br><br><h6>
+                        Stock Available: <i style="color: green; font-weight: bold;">{{selectedProduct.quantity}}</i>
+                    </h6>
+                    <p class="release-date">
+                        <span style="font-weight: bold;">Product listed on: </span>
+                        <i>{{selectedProduct.releaseDate | date:'yyyy-MM-dd'}}</i>
+                    </p>
+                </div>
+
+                <div class="update-button">
+                    <button class="btn btn-primary" type="button">Update</button>&nbsp;
+                    <button class="btn btn-info" type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

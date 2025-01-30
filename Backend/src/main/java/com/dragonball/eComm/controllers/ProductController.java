@@ -27,14 +27,14 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping("/{prodId}")
+    public ResponseEntity<Product> getProductById(@PathVariable Integer prodId){
+        return productService.getProductById(prodId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
-//
-//    @GetMapping("/{prodId}")
-//    public ResponseEntity<Product> getProductById(@PathVariable int prodId){
-//        return productService.getProductById(prodId)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
+
 //
 //    @PostMapping
 //    public void addProduct(@RequestBody Product product){

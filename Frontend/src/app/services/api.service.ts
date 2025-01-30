@@ -11,7 +11,11 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  getAllProducts():Observable<Product[]>{
+  getAllProductsAPI():Observable<Product[]>{
     return this.http.get<Product[]>(`${environment.BASE_URL}`);
+  }
+
+  getProductByIdAPI(prodId:number):Observable<Product>{
+    return this.http.get<Product>(`${environment.BASE_URL}/${prodId}`)
   }
 }
