@@ -3,8 +3,10 @@ package com.dragonball.eComm.controllers;
 import com.dragonball.eComm.model.Product;
 import com.dragonball.eComm.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,8 +25,8 @@ public class ProductController {
 /**METHODS**/
 
     @GetMapping
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts(){
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/{prodId}")
@@ -34,12 +36,17 @@ public class ProductController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PostMapping("/addproduct")
+    public  ResponseEntity<?> addAProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile){
+        try {
+            Product savedProduct = productService.addAProduct(product,imageFile);
+            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error adding product " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-//
-//    @PostMapping
-//    public void addProduct(@RequestBody Product product){
-//        productService.addAProduct(product);
-//    }
+
 //
 //    @PutMapping
 //    public void updateProduct(@RequestBody Product product){

@@ -1,9 +1,6 @@
 package com.dragonball.eComm.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,10 +19,26 @@ public class Product {
     private Date releaseDate;
     private boolean available;
     private int quantity;
+    private String imageName;
+    private String imageType;
+    @Lob
+    private byte[] imageDate;
 
     public Product(){}
 
-    public Product(String prodName, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity) {
+//    public Product(String prodName, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity) {
+//        this.prodName = prodName;
+//        this.description = description;
+//        this.brand = brand;
+//        this.price = price;
+//        this.category = category;
+//        this.releaseDate = releaseDate;
+//        this.available = available;
+//        this.quantity = quantity;
+//    }
+
+
+    public Product(String prodName, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity, String imageName, String imageType, byte[] imageDate) {
         this.prodName = prodName;
         this.description = description;
         this.brand = brand;
@@ -34,6 +47,9 @@ public class Product {
         this.releaseDate = releaseDate;
         this.available = available;
         this.quantity = quantity;
+        this.imageName = imageName;
+        this.imageType = imageType;
+        this.imageDate = imageDate;
     }
 
     public Integer getProdId() {
@@ -103,5 +119,29 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageDate() {
+        return imageDate;
+    }
+
+    public void setImageDate(byte[] imageDate) {
+        this.imageDate = imageDate;
     }
 }

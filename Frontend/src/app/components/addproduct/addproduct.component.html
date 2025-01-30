@@ -1,1 +1,56 @@
-<p>addproduct works!</p>
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Add a new product</h2>
+        <form [formGroup]="addProductForm" (submit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <input type="text" class="form-control" formControlName="prodName" placeholder="Enter product name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Product Brand</label>
+                <input type="text" class="form-control" formControlName="brand" placeholder="Enter brand name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" formControlName="description" placeholder="Product description..">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input type="number" class="form-control" formControlName="price">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select" formControlName="category">
+                    <option value="">Select category</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Headphone">Headphone</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Toys">Toys</option>
+                    <option value="Fashion">Fashion</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Stock Quantity</label>
+                <input type="number" class="form-control" formControlName="quantity">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Release Date</label>
+                <input type="date" class="form-control" formControlName="releaseDate">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" class="form-control" (change)="handleImageChange($event)">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" formControlName="available">
+                <label class="form-check-label">Product Available</label>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" [disabled]="addProductForm.invalid">Submit</button>
+                <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

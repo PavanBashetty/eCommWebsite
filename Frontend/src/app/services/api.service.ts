@@ -18,4 +18,8 @@ export class ApiService {
   getProductByIdAPI(prodId:number):Observable<Product>{
     return this.http.get<Product>(`${environment.BASE_URL}/${prodId}`)
   }
+
+  addAProduct(formData:FormData):Observable<Product>{
+    return this.http.post<Product>(`${environment.BASE_URL}/addproduct`, formData);
+  }
 }
