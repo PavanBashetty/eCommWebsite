@@ -30,14 +30,13 @@ export class AddproductComponent {
   }
 
   onSubmit(){
-
     const formData = new FormData();
     if(this.image){
       formData.append('imageFile',this.image);
     }
     formData.append('product', new Blob([JSON.stringify(this.addProductForm.value)], {type: 'application/json'}));
 
-    this.apiService.addAProduct(formData).subscribe({
+    this.apiService.addAProductAPI(formData).subscribe({
       next:()=>{
         alert("Product added successfully!");
         this.onCancel();

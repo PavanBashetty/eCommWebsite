@@ -3,6 +3,8 @@ import { ApiService } from '../../services/api.service';
 import { Product } from '../../model/interface/Product';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +17,8 @@ export class ProductDetailsComponent {
   prodId:number = 0;
   selectedProduct!:Product;
   isLoading:boolean = false;
+  imageURL:string = '';
+  productDetailSubscription!:Subscription;
 
   constructor(private apiService:ApiService, private route:ActivatedRoute){}
 
@@ -28,6 +32,7 @@ export class ProductDetailsComponent {
     })
 
     this.getProductById();
+    //this.getImageByProductId();
   }
 
 
@@ -43,6 +48,21 @@ export class ProductDetailsComponent {
       },
       complete:()=>{this.isLoading = false}
     })
+  }
+
+  getImageByProductId(){
+    this.apiService.getImageByProductIdAPI(this.prodId).subscribe({
+      next:(response:any)=>{
+        this.imageURL = URL.createObjectURL(response.body);
+      },
+      error:(error)=>{console.error(error)}
+    })
+  }
+
+  ngOnDestroy(){
+    if(this.productDetailSubscription){
+      this.productDetailSubscription.unsubscribe();
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import com.dragonball.eComm.model.Product;
 import com.dragonball.eComm.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +23,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-/**METHODS**/
 
+/**METHODS**/
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
@@ -44,6 +45,18 @@ public class ProductController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error adding product " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/{prodId}/image")
+    public ResponseEntity<byte[]> getImageByProductId(@PathVariable Integer prodId){
+
+        Product product = productService.getProductById(prodId)
+                .orElseThrow(()->new RuntimeException("Product with id: " + prodId + " not found"));
+
+        byte[] imageFile = product.getImageDate();
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(product.getImageType()))
+                .body(imageFile);
     }
 
 

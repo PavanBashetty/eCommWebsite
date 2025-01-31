@@ -19,7 +19,11 @@ export class ApiService {
     return this.http.get<Product>(`${environment.BASE_URL}/${prodId}`)
   }
 
-  addAProduct(formData:FormData):Observable<Product>{
+  addAProductAPI(formData:FormData):Observable<Product>{
     return this.http.post<Product>(`${environment.BASE_URL}/addproduct`, formData);
+  }
+
+  getImageByProductIdAPI(prodId:number):Observable<any>{
+    return this.http.get<any>(`${environment.BASE_URL}/${prodId}/image`)
   }
 }

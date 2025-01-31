@@ -25,19 +25,6 @@ public class Product {
     private byte[] imageDate;
 
     public Product(){}
-
-//    public Product(String prodName, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity) {
-//        this.prodName = prodName;
-//        this.description = description;
-//        this.brand = brand;
-//        this.price = price;
-//        this.category = category;
-//        this.releaseDate = releaseDate;
-//        this.available = available;
-//        this.quantity = quantity;
-//    }
-
-
     public Product(String prodName, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean available, int quantity, String imageName, String imageType, byte[] imageDate) {
         this.prodName = prodName;
         this.description = description;
